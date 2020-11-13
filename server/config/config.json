@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "ulises",
+    "password": null,
+    "database": "desarrollo",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "ulises",
+    "password": null,
+    "database": "test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "ulises",
+    "password": null,
+    "database": "production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
