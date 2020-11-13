@@ -26,7 +26,7 @@ class Presupuestos {
         const { nombre } = req.body
         return Presupuesto.findByPk(req.params.presupuestoId).then((presupuesto) => {
             presupuesto.update({
-              nombre: nombre || presupuesto.name,
+              nombre: nombre || presupuesto.nombre,
             })
             .then((updatedPresupuesto) => {
               res.status(200).send({
