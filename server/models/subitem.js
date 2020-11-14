@@ -1,41 +1,33 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class SubItem extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      SubItem.hasMany(models.Solicitud, {
-        foreignKey: 'subitemId',
-      });
-      SubItem.belongsTo(models.Item, {
-        foreignKey: 'itemId',
-      });
-    }
-  };
-  SubItem.init({
+  const SubItem = sequelize.define('SubItem', {
     nombre: {
       type: DataTypes.STRING,
-      allowNull: { args: false }
+      allowNull: {
+        args: false,
+        msg: 'Please enter your name'
+      }
     },
     monto: {
       type: DataTypes.INTEGER,
       allowNull: {
-        args: true,
+        args: false,
+        msg: 'Monto Calculado',
         defaultValue: 0
       }
     }
   }, {
-    sequelize,
-    modelName: 'SubItem',
     freezeTableName: true,
     tableName: 'SubItem',
   });
+  SubItem.associate = function(models) {
+    // associations can be defined here
+    SubItem.hasMany(models.Solicitud, {
+      foreignKey: 'subitemId',
+    });
+    SubItem.belongsTo(models.Item, {
+      foreignKey: 'itemId',
+    });
+  };
   return SubItem;
 };

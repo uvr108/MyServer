@@ -6,6 +6,7 @@ class OrdenCompras {
     static insert(req, res) {
         const { fecha_emision, numero_oc, observaciones } = req.body
         const { solicitudId, centrocostoId, estadoordenId } = req.params
+        console.log(`solicitudId ${solicitudId} centrocostoId ${centrocostoId} estadoordenId ${estadoordenId}`);
         return OrdenCompra
             .create({
                 fecha_emision,
@@ -51,8 +52,8 @@ class OrdenCompras {
                   res.status(200).send({
                     message: 'OrdenCompra updated successfully',
                     data: {
-                        nombre: nombre || upOrden.fecha_emision,
-                        monto: monto || upOrden.numero_oc,
+                        fecha_emision: fecha_emision || upOrden.fecha_emision,
+                        numero_oc: numero_oc || upOrden.numero_oc,
                         observaciones: observaciones || upOrden.observaciones      
                     }
                   })

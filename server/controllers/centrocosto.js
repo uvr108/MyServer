@@ -27,13 +27,13 @@ class CentroCostos {
         const { nombre } = req.body
         return CentroCosto.findByPk(req.params.centrocostoId).then((centrocosto) => {
             centrocosto.update({
-              nombre: nombre || centrocosto.name,
+              nombre: nombre || centrocosto.nombre,
             })
             .then((updatedCentroCosto) => {
               res.status(200).send({
                 message: 'CentroCosto updated successfully',
                 data: {
-                  centrocosto: centrocosto || updatedCentroCosto.nombre,
+                  nombre: nombre || updatedCentroCosto.nombre,
                 }
               })
             })

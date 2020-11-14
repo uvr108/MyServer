@@ -42,16 +42,16 @@ class Solicitudes {
               .then(solicitudes => res.status(200).send(solicitudes));
         }
         static modify(req, res) {
-          const { solicitante, fecha, numero_registro, CentroCosto, EstadoSolicitud } = req.body
-          console.log(`LOG: ${solicitante}, ${fecha}, ${numero_registro}, ${CentroCosto}, ${EstadoSolicitud}`);
+          const { solicitante, fecha, numero_registro } = req.body
+          console.log(`LOG: ${solicitante}, ${fecha}, ${numero_registro}`);
           return Solicitud.findByPk(req.params.solicitudId).then((solicitud) => 
           { 
               solicitud.update({
                 solicitante: solicitante || solicitud.solicitante,
                 fecha: fecha || solicitud.fecha,
                 numero_registro:numero_registro || solicitud.numero_registro,
-                centrocostoId: CentroCosto || solicitud.centrocostoId,
-                estadosolicitudId: EstadoSolicitud || estadosolicitudId.estadosolicitudId
+                // centrocostoId: CentroCosto || solicitud.centrocostoId,
+                // estadosolicitudId: EstadoSolicitud || estadosolicitudId.estadosolicitudId
               })
               .then((updatedSolicitud) => {
                 res.status(200).send({
@@ -60,8 +60,8 @@ class Solicitudes {
                     solicitante: solicitante || updatedSolicitud.solicitante,
                     fecha: fecha || updatedSolicitud.fecha,
                     numero_registro:numero_registro || solicitud.numero_registro,
-                    centrocostoId: CentroCosto || solicitud.centrocostoId,
-                    estadosolicitudId: EstadoSolicitud || solicitud.estadosolicitudId
+                    // centrocostoId: CentroCosto || solicitud.centrocostoId,
+                    // estadosolicitudId: EstadoSolicitud || solicitud.estadosolicitudId
                   }
                 })
               })

@@ -87,6 +87,8 @@ export default (app) => {
 
     app.post('/api/EstadoFactura', EstadoFacturas.insert); 
     app.get('/api/EstadoFactura', EstadoFacturas.listar); 
+    app.put('/api/EstadoFactura/:estadofacturaId', EstadoFacturas.modify);
+    app.delete('/api/EstadoFactura/:estadofacturaId', EstadoFacturas.deleteByPk);
 
     // Factura
 

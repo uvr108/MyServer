@@ -27,13 +27,13 @@ class EstadoFacturas {
         const { nombre } = req.body
         return EstadoFactura.findByPk(req.params.estadofacturaId).then((estadofactura) => {
             estadofactura.update({
-              nombre: nombre || estadofactura.name,
+              nombre: nombre || estadofactura.nombre,
             })
-            .then((updatedEstadoFactura) => {
+            .then((updateEstadoFactura) => {
               res.status(200).send({
                 message: 'EstadoFactura updated successfully',
                 data: {
-                  nombre: nombre || updatedEstadoFactura.nombre,
+                  nombre: nombre || updateEstadoFactura.nombre,
                 }
               })
             })
