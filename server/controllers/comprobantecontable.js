@@ -60,25 +60,25 @@ class ComprobanteContables {
             .catch(error => res.status(400).send(error));
         }
 
-
         static deleteByPk(req, res) {
-            return ComprobanteContable
-              .findByPk(req.params.comprobantecontableId)
-              .then(compro => {
-                if(!compro) {
-                  return res.status(400).send({
-                  message: 'Comprobante Not Found',
-                  });
-                }
-                return ComprobanteContable
-                  .destroy()
-                  .then(() => res.status(200).send({
-                    message: 'Comprobante Contable successfully deleted'
-                  }))
-                  .catch(error => res.status(400).send(error));
-              })
-              .catch(error => res.status(400).send(error))
-          } 
+          return ComprobanteContable
+            .findByPk(req.params.comprobantecontableId)
+            .then(oc => {
+              if(!oc) {
+                return res.status(400).send({
+                message: 'Comprobante contable Not Found',
+                });
+              }
+              return oc
+                .destroy()
+                .then(() => res.status(200).send({
+                  message: 'OrdenCompra successfully deleted'
+                }))
+                .catch(error => res.status(400).send(error));
+            })
+            .catch(error => res.status(400).send(error))
+        } 
+
         
 }
 
