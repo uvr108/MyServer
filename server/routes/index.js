@@ -8,6 +8,8 @@ import Solicitudes from '../controllers/solicitud';
 import OrdenCompras from '../controllers/ordencompra';
 import Facturas from '../controllers/factura';
 import EstadoFacturas from '../controllers/estadofactura';
+import CuentaContables from '../controllers/cuentacontable';
+import ComprobanteContables from '../controllers/comprobantecontable';
 import db from '../models';
 
 export default (app) => {
@@ -92,7 +94,22 @@ export default (app) => {
 
     // Factura
 
-    app.get('/api/Factura/fk/:ordencompraId', Facturas.getByFk);
+    app.get('/api/Factura', Facturas.listar);
+    app.put('/api/Factura/:facturaId', Facturas.modify);
     app.post('/api/Factura/:estadofacturaId/:ordencompraId', Facturas.insert);
+
+    // CuentaContable
+
+    app.get('/api/CuentaContable', CuentaContables.listar);
+    app.post('/api/CuentaContable', CuentaContables.insert);
+    app.put('/api/CuentaContable/:cuentacontableId', CuentaContables.modify);
+    app.delete('/api/CuentaContable/:cuentacontableId', CuentaContables.deleteByPk);
+
+   // ComprobanteContable
+
+   app.get('/api/ComprobanteContable', ComprobanteContables.listar);
+   app.post('/api/ComprobanteContable/:facturaId/:cuentacontableId', ComprobanteContables.insert);
+   app.put('/api/ComprobanteContable/:comprobantecontableId', ComprobanteContables.modify);
+   app.delete('/api/ComprobanteContable/:comprobantecontableId', ComprobanteContables.deleteByPk);
 
 }

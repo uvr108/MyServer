@@ -22,7 +22,7 @@ class Facturas {
             }))
             
         }
-        static list(req, res) {
+        static listar(req, res) {
             return Factura
               .findAll()
               .then(fac => res.status(200).send(fac));
@@ -41,32 +41,36 @@ class Facturas {
               .then(fac => res.status(200).send(fac));
         }
 
+
         static modify(req, res) {
-            const { numero_registro, numero_cuotas, monto, fecha_recepcion } = req.body
-            return Factura.findByPk(req.params.facturaId).then((fac) => {  
-                Factura.update({
-                  numero_registro: numero_cuotas || fac.numero_registro,
-                  numero_cuotas: numero_cuotas || fac.numero_cuotas,
-                  monto: monto || fac.monto,
-                  fecha_recepcion: fecha_recepcion || fac.fecha_recepcion
+          const { numero_registro, numero_cuotas, monto, fecha_recepcion, observacion } = req.body
+          return Factura.findByPk(req.params.facturaId).then((factura) => { 
+              factura.update({
+                numero_registro: numero_registro || factura.numero_registro,
+                numero_cuotas: numero_cuotas || factura.numero_cuotas,
+                monto: monto || factura.monto,
+                fecha_recepcion: fecha_recepcion || factura.fecha_recepcion,
+                observacion: observacion || factura.observacion
+              })
+              .then((factura) => {
+                res.status(200).send({
+                  message: 'Factura updated successfully',
+                  data: {
+                    numero_registro: numero_registro || factura.numero_registro,
+                    numero_cuotas: numero_cuotas || factura.numero_cuotas,
+                    monto: monto || factura.monto,
+                    fecha_recepcion: fecha_recepcion || factura.fecha_recepcion,
+                    observacion: observacion || factura.observacion    
+                  }
                 })
-                .then((fac) => {
-                  res.status(200).send({
-                    message: 'Solicitud updated successfully',
-                    data: {
-                        numero_registro: numero_registro || fac.numero_registro,
-                        numero_cuotas: numero_cuotas || fac.numero_cuotas,
-                        monto: monto || fac.monto,
-                        fecha_recepcion: fecha_recepcion || fac.fecha_recepcion
-      
-                    }
-                  })
-                })
-                .catch(error => res.status(400).send(error));
               })
               .catch(error => res.status(400).send(error));
-          } 
-       static deleteByPk(req, res) {
+            })
+            .catch(error => res.status(400).send(error));
+        }
+
+
+ static deleteByPk(req, res) {
             return Factura
               .findByPk(req.params.facturaId)
               .then(fac => {
@@ -85,6 +89,6 @@ class Facturas {
               .catch(error => res.status(400).send(error))
           } 
 
-    }
+}
 
 export default Facturas
