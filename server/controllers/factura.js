@@ -35,11 +35,12 @@ class Facturas {
         }
 
         static getByFk(req, res) {
-            return Factura
-              .findAll({ where : { ordencompraId: req.params.ordencompraId }, attributes: 
-                ["numero_registro", "numero_cuotas", "monto", "fecha_recepcion","observacion"]})
-              .then(fac => res.status(200).send(fac));
-        }
+          return Factura
+            .findAll({ where : { ordencompraId: req.params.ordencompraId },
+              attributes : ["numero_registro", "numero_cuotas", "monto", "fecha_recepcion","observacion"] }
+            )
+            .then(fac => res.status(200).send(fac));
+      }
 
 
         static modify(req, res) {

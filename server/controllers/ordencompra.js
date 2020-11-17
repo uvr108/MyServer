@@ -34,11 +34,12 @@ class OrdenCompras {
         }
 
         static getByFk(req, res) {
-            return OrdenCompra
-              .findAll({ where : { solicitudId: req.params.solicitudId}, attributes: ['id','fecha_emision',
-              'numero_oc','observaciones','centrocostoId','solicitudId','estadoordenId']})
-              .then(oc => res.status(200).send(oc));
-        }
+          return OrdenCompra
+            .findAll({ where : { solicitudId: req.params.solicitudId },
+              attributes : ['id','fecha_emision','numero_oc','observaciones','centrocostoId','estadoordenId', 'solicitudId']}
+            )
+            .then(solicitudes => res.status(200).send(solicitudes));
+      }
 
         static modify(req, res) {
             const { fecha_emision, numero_oc, observaciones } = req.body

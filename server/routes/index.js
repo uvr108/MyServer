@@ -78,8 +78,8 @@ export default (app) => {
 
     app.post('/api/OrdenCompra/:solicitudId/:centrocostoId/:estadoordenId', OrdenCompras.insert); 
     app.get('/api/OrdenCompra', OrdenCompras.listar); 
-    app.get('/api/OrdenCompra/pk/:ordencompraId',OrdenCompras.getByPk);
-    app.get('/api/OrdenCompra/fk/:ordencompraId',OrdenCompras.getByFk);
+    app.get('/api/OrdenCompra/:ordencompraId',OrdenCompras.getByPk);
+    app.get('/api/OrdenCompra/fk/:solicitudId',OrdenCompras.getByFk);
     app.put('/api/OrdenCompra/:ordencompraId', OrdenCompras.modify);
     app.delete('/api/OrdenCompra/:ordencompraId', OrdenCompras.deleteByPk);
 
@@ -96,7 +96,8 @@ export default (app) => {
 
     app.get('/api/Factura', Facturas.listar);
     app.put('/api/Factura/:facturaId', Facturas.modify);
-    app.post('/api/Factura/:estadofacturaId/:ordencompraId', Facturas.insert);
+    app.get('/api/Factura/fk/:ordencompraId',Facturas.getByFk);
+    app.post('/api/Factura/:ordencompraId/:estadofacturaId', Facturas.insert);
 
     // CuentaContable
 
