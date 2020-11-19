@@ -96,6 +96,8 @@ export default (app) => {
 
     app.get('/api/Factura', Facturas.listar);
     app.put('/api/Factura/:facturaId', Facturas.modify);
+    app.get('/api/Factura/:facturaId', Facturas.getByPk);
+    app.delete('/api/Factura/:facturaId', Facturas.deleteByPk);
     app.get('/api/Factura/fk/:ordencompraId',Facturas.getByFk);
     app.post('/api/Factura/:ordencompraId/:estadofacturaId', Facturas.insert);
 
@@ -111,6 +113,7 @@ export default (app) => {
    app.get('/api/ComprobanteContable', ComprobanteContables.listar);
    app.post('/api/ComprobanteContable/:facturaId/:cuentacontableId', ComprobanteContables.insert);
    app.put('/api/ComprobanteContable/:comprobantecontableId', ComprobanteContables.modify);
+   app.get('/api/ComprobanteContable/fk/:facturaId', ComprobanteContables.getByFk);
    app.delete('/api/ComprobanteContable/:comprobantecontableId', ComprobanteContables.deleteByPk);
 
 }

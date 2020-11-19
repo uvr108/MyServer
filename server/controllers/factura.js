@@ -24,20 +24,20 @@ class Facturas {
         }
         static listar(req, res) {
             return Factura
-              .findAll()
+              .findAll( { attributes : ['id','numero_registro','numero_cuotas','monto','fecha_recepcion','observacion','estadofacturaId','ordencompraId'] })
               .then(fac => res.status(200).send(fac));
           }
-    
+
         static getByPk(req, res) {
             return Factura
-              .findByPk({ where : { facturaId : req.params.facturaId }, attributes:  
-                ["numero_registro", "numero_cuotas", "monto", "fecha_recepcion","observacion"] })
-        }
+              .findByPk(req.params.facturaId)
+              .then(factura => res.status(200).send(factura));
+        }          
 
         static getByFk(req, res) {
           return Factura
             .findAll({ where : { ordencompraId: req.params.ordencompraId },
-              attributes : ["numero_registro", "numero_cuotas", "monto", "fecha_recepcion","observacion"] }
+              attributes : ['id','numero_registro','numero_cuotas','monto','fecha_recepcion','observacion','estadofacturaId','ordencompraId'] }
             )
             .then(fac => res.status(200).send(fac));
       }
@@ -70,25 +70,24 @@ class Facturas {
             .catch(error => res.status(400).send(error));
         }
 
-
- static deleteByPk(req, res) {
-            return Factura
-              .findByPk(req.params.facturaId)
-              .then(fac => {
-                if(!fac) {
-                  return res.status(400).send({
-                  message: 'Factura Not Found',
-                  });
-                }
-                return Factura
-                  .destroy()
-                  .then(() => res.status(200).send({
-                    message: 'Factura successfully deleted'
-                  }))
-                  .catch(error => res.status(400).send(error));
-              })
-              .catch(error => res.status(400).send(error))
-          } 
+        static deleteByPk(req, res) {
+          return Factura
+            .findByPk(req.params.facturaId)
+            .then(factura => {
+              if(!factura) {
+                return res.status(400).send({
+                message: 'Solicitud Not Found',
+                });
+              }
+              return factura
+                .destroy()
+                .then(() => res.status(200).send({
+                  message: 'Factura successfully deleted'
+                }))
+                .catch(error => res.status(400).send(error));
+            })
+            .catch(error => res.status(400).send(error))
+        } 
 
 }
 

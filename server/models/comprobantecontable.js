@@ -1,8 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const ComprobanteContable = sequelize.define('ComprobanteContable', {
-    fecha_ingreso: DataTypes.DATE,
-    numero_registro: DataTypes.STRING
+
+    numero_registro: DataTypes.STRING, 
+    fecha_ingreso: DataTypes.DATE
+
   }, {
     freezeTableName: true,
     tableName: 'ComprobanteContable',

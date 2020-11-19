@@ -36,7 +36,7 @@ class OrdenCompras {
         static getByFk(req, res) {
           return OrdenCompra
             .findAll({ where : { solicitudId: req.params.solicitudId },
-              attributes : ['id','fecha_emision','numero_oc','observaciones','centrocostoId','estadoordenId', 'solicitudId']}
+              attributes : ['id','numero_oc','fecha_emision','observaciones','centrocostoId','estadoordenId', 'solicitudId']}
             )
             .then(solicitudes => res.status(200).send(solicitudes));
       }

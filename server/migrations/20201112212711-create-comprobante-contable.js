@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fecha_ingreso: {
-        type: Sequelize.DATE
-      },
       numero_registro: {
         type: Sequelize.STRING
+      },
+      fecha_ingreso: {
+        type: Sequelize.DATE
       },
       facturaId: {
         allowNull: false,

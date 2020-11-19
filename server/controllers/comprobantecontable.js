@@ -13,29 +13,29 @@ class ComprobanteContables {
                 facturaId,
                 cuentacontableId
             })
-            .then(fac => res.status(201).send({
+            .then(cuenta => res.status(201).send({
                 message: `Your tem has been created successfully `,
-                fac
+                cuenta
             }))
             
         }
         static listar(req, res) {
             return ComprobanteContable
-              .findAll()
+              .findAll({ attributes: ['id','numero_registro','fecha_ingreso', 'cuentacontableId', 'facturaId'] })
               .then(fac => res.status(200).send(fac));
           }
     
         static getByPk(req, res) {
             return ComprobanteContable
               .findByPk({ where : { comprobantecontableId : req.params.componentecontableId }, attributes:  
-                ["fecha_ingreso", "numero_registro"] })
+                ['id','numero_registro','fecha_ingreso', 'cuentacontableId', 'facturaId'] })
         }
 
         static getByFk(req, res) {
             return ComprobanteContable
               .findAll({ where : { facturaId: req.params.facturaId }, attributes: 
-                ["fecha_ingreso", "numero_registro"]})
-              .then(fac => res.status(200).send(fac));
+                ['id', 'numero_registro','fecha_ingreso', 'cuentacontableId', 'facturaId']})
+              .then(comp => res.status(200).send(comp));
         }
 
 
