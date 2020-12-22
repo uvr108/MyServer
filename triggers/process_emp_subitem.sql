@@ -3,8 +3,7 @@ CREATE OR REPLACE FUNCTION process_emp_subitem() RETURNS TRIGGER AS $emp_subitem
         itemid int;
     BEGIN
         SELECT "itemId" INTO itemid FROM public."SubItem" WHERE id = OLD.id  LIMIT 1;
-        
-        RAISE NOTICE '% % % cannot have a negative salary', OLD.id,  NEW.monto, itemid;
+        RAISE NOTICE 'OLD.id -> % NEW.monto -> % itemId -> %', OLD.id,  NEW.monto, itemid;
         
         UPDATE Public."Item"
             SET monto = (

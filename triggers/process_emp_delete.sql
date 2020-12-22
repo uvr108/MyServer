@@ -1,14 +1,18 @@
 CREATE OR REPLACE FUNCTION process_emp_delete() RETURNS TRIGGER AS $emp_delete$
     DECLARE
-        itemid int;
+        itemid  int;
     BEGIN
-        SELECT "itemId" INTO itemid FROM public."SubItem" WHERE id = OLD.id;
-        RAISE NOTICE 'OLD.id -> % OLD.monto -> %  itemId ->  % : estos son mis valores DELETE', OLD.id, OLD.monto, itemid;
+
+        -- SELECT id INTO itemid FROM Public."SubItem" WHERE id = OLD.id; 
+
+        RAISE NOTICE 'old.monto  %' , OLD.monto;
+        RAISE NOTICE 'old.id  %' , OLD.id;
+        RAISE NOTICE 'old.itemId  %' , OLD."itemId";
 
         UPDATE Public."Item"
         SET monto = monto - OLD.monto
-        WHERE id = itemid;
-     
+        WHERE id = OLD."itemId";
+
         RETURN NULL; -- result is ignored since this is an AFTER trigger
     END;
     $emp_delete$ LANGUAGE plpgsql;
