@@ -41,17 +41,20 @@ class Solicitudes {
               )
               .then(solicitudes => res.status(200).send(solicitudes));
         }
+
         static modify(req, res) {
-          const { solicitante, fecha, numero_registro } = req.body
+          const { solicitante, fecha, numero_registro, centrocostoId, estadosolicitudId } = req.body
+          // const { centrocostoId, estadosolicitudId } = req.params
           console.log(`LOG: ${solicitante}, ${fecha}, ${numero_registro}`);
+          console.log(`LOG: ${centrocostoId}, ${estadosolicitudId}`);
           return Solicitud.findByPk(req.params.solicitudId).then((solicitud) => 
           { 
               solicitud.update({
                 solicitante: solicitante || solicitud.solicitante,
                 fecha: fecha || solicitud.fecha,
                 numero_registro:numero_registro || solicitud.numero_registro,
-                // centrocostoId: CentroCosto || solicitud.centrocostoId,
-                // estadosolicitudId: EstadoSolicitud || estadosolicitudId.estadosolicitudId
+                centrocostoId: centrocostoId || solicitud.centrocostoId,
+                estadosolicitudId: estadosolicitudId || solicitud.estadosolicitudId
               })
               .then((updatedSolicitud) => {
                 res.status(200).send({
@@ -59,9 +62,9 @@ class Solicitudes {
                   data: {
                     solicitante: solicitante || updatedSolicitud.solicitante,
                     fecha: fecha || updatedSolicitud.fecha,
-                    numero_registro:numero_registro || solicitud.numero_registro,
-                    // centrocostoId: CentroCosto || solicitud.centrocostoId,
-                    // estadosolicitudId: EstadoSolicitud || solicitud.estadosolicitudId
+                    numero_registro:numero_registro || updateSolicitud.numero_registro,
+                    centrocostoId: centrocostoId || updateSolicitud.centrocostoId,
+                    estadosolicitudId: estadosolicitudId || updateSolicitud.estadosolicitudId
                   }
                 })
               })

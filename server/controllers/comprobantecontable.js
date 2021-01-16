@@ -40,18 +40,20 @@ class ComprobanteContables {
 
 
         static modify(req, res) {
-          const { fecha_ingreso, numero_registro } = req.body
+          const { fecha_ingreso, numero_registro, cuentacontableId } = req.body
           return ComprobanteContable.findByPk(req.params.comprobantecontableId).then((comprobante) => { 
               comprobante.update({
                 fecha_ingreso: fecha_ingreso || comprobante.fecha_ingreso,
-                numero_registro: numero_registro || comprobante.numero_registro
+                numero_registro: numero_registro || comprobante.numero_registro,
+                cuentacontableId: cuentacontableId || comprobante.cuentacontableId
               })
               .then((comprobante) => {
                 res.status(200).send({
                   message: 'Comprobante Contable updated successfully',
                   data: {
                     fecha_ingreso: fecha_ingreso || comprobante.fecha_ingreso,
-                    numero_registro: numero_registro || comprobante.numero_registro 
+                    numero_registro: numero_registro || comprobante.numero_registro,
+                    cuentacontableId: cuentacontableId || comprobante.cuentacontableId
                   }
                 })
               })

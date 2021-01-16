@@ -44,14 +44,16 @@ class Facturas {
 
 
         static modify(req, res) {
-          const { numero_registro, numero_cuotas, monto, fecha_recepcion, observacion } = req.body
+          const { numero_registro, numero_cuotas, monto, fecha_recepcion, observacion, estadofacturaId } = req.body
+
           return Factura.findByPk(req.params.facturaId).then((factura) => { 
               factura.update({
                 numero_registro: numero_registro || factura.numero_registro,
                 numero_cuotas: numero_cuotas || factura.numero_cuotas,
                 monto: monto || factura.monto,
                 fecha_recepcion: fecha_recepcion || factura.fecha_recepcion,
-                observacion: observacion || factura.observacion
+                observacion: observacion || factura.observacion,
+                estadofacturaId: estadofacturaId || factura.estadofacturaId
               })
               .then((factura) => {
                 res.status(200).send({
@@ -61,7 +63,8 @@ class Facturas {
                     numero_cuotas: numero_cuotas || factura.numero_cuotas,
                     monto: monto || factura.monto,
                     fecha_recepcion: fecha_recepcion || factura.fecha_recepcion,
-                    observacion: observacion || factura.observacion    
+                    observacion: observacion || factura.observacion,
+                    estadofacturaId: estadofacturaId || factura.estadofacturaId    
                   }
                 })
               })
