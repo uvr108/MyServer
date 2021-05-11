@@ -37,9 +37,14 @@ class Facturas {
         static getByFk(req, res) {
           return Factura
             .findAll({ where : { ordencompraId: req.params.ordencompraId },
-              attributes : ['id','numero_registro','numero_cuotas','monto','fecha_recepcion','observacion','estadofacturaId','ordencompraId'] }
+              attributes : ['id','numero_registro','numero_cuotas','monto',
+              'fecha_recepcion','observacion','estadofacturaId','ordencompraId'] ,
+              order: [
+                ['id', 'ASC']
+              ]}
             )
-            .then(fac => res.status(200).send(fac));
+            .then(fac => res.status(200).send(fac))
+            .catch(error => { console.log('caught', error.message); });
       }
 
 

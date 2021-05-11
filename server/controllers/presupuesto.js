@@ -18,7 +18,7 @@ class Presupuestos {
 
     static listar(req, res) {
         return Presupuesto
-          .findAll({attributes : ['id','nombre','monto'], order: [['id','asc']]})
+          .findAll({attributes : ['id','nombre','monto'], order: [['id','ASC']]})
           .then(p => res.status(200).send(p));
       }
  

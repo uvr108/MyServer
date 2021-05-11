@@ -32,7 +32,8 @@ class Items {
 
           static getByFk(req, res) {
             return Item
-              .findAll({ where : { presupuestoId: req.params.presupuestoId}, attributes : ['id','nombre','monto'], order: [['id','asc']]})
+              .findAll({ where : { presupuestoId: req.params.presupuestoId},
+                 attributes : ['id','nombre','monto','presupuestoId'], order: [['id','ASC']]})
               .then(items => res.status(200).send(items));
           }
     

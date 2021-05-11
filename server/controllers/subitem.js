@@ -39,7 +39,10 @@ class SubItems {
 
         static getByFk(req, res) {
             return SubItem
-              .findAll({ where : { itemId: req.params.itemId}, attributes: ['id','nombre','monto']})
+              .findAll({ where : { itemId: req.params.itemId}, 
+                attributes: ['id','nombre','monto','itemId'],  order: [
+                ['id', 'ASC']
+              ]})
               .then(subitems => res.status(200).send(subitems));
         }
 

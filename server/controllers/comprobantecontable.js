@@ -28,14 +28,18 @@ class ComprobanteContables {
         static getByPk(req, res) {
             return ComprobanteContable
               .findByPk({ where : { comprobantecontableId : req.params.componentecontableId }, attributes:  
-                ['id','numero_registro','fecha_ingreso', 'cuentacontableId', 'facturaId'] })
+                ['id','numero_registro','fecha_ingreso', 'cuentacontableId', 'facturaId'] });
         }
 
         static getByFk(req, res) {
             return ComprobanteContable
               .findAll({ where : { facturaId: req.params.facturaId }, attributes: 
-                ['id', 'numero_registro','fecha_ingreso', 'cuentacontableId', 'facturaId']})
-              .then(comp => res.status(200).send(comp));
+                ['id', 'numero_registro','fecha_ingreso', 'cuentacontableId', 'facturaId'],
+                order: [
+                  ['id', 'ASC']
+                ]})
+              .then(comp => res.status(200).send(comp))
+              .catch(error => { console.log('caught', error.message); });
         }
 
 

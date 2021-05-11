@@ -36,14 +36,18 @@ class OrdenCompras {
         static getByFk(req, res) {
           return OrdenCompra
             .findAll({ where : { solicitudId: req.params.solicitudId },
-              attributes : ['id','numero_oc','fecha_emision','observaciones','centrocostoId','estadoordenId', 'solicitudId']}
+              attributes : ['id','numero_oc','fecha_emision','observaciones','centrocostoId','estadoordenId', 'solicitudId'], 
+              order: [
+                ['id', 'ASC']
+              ]}
             )
-            .then(solicitudes => res.status(200).send(solicitudes));
+            .then(solicitudes => res.status(200).send(solicitudes))
+            .catch(error => { console.log('caught', error.message); });
       }
 
         static modify(req, res) {
             const { fecha_emision, numero_oc, observaciones, centrocostoId, estadoordenId } = req.body
-
+            console.log('modify -> ',req.params.ordencompraId);
             return OrdenCompra.findByPk(req.params.ordencompraId).then((ordencompra) => { 
                 ordencompra.update({
                   fecha_emision: fecha_emision || ordencompra.fecha_emision,
