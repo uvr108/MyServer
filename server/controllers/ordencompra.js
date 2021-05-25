@@ -46,15 +46,15 @@ class OrdenCompras {
       }
 
         static modify(req, res) {
-            const { fecha_emision, numero_oc, observaciones, centrocostoId, estadoordenId } = req.body
-            console.log('modify -> ',req.params.ordencompraId);
+            const { fecha_emision, numero_oc, observaciones, CentroCosto, EstadoOrden } = req.body
+            // console.log('modify -> ',req.params.ordencompraId);
             return OrdenCompra.findByPk(req.params.ordencompraId).then((ordencompra) => { 
                 ordencompra.update({
                   fecha_emision: fecha_emision || ordencompra.fecha_emision,
                   numero_oc: numero_oc || ordencompra.numero_oc,
                   observaciones: observaciones || ordencompra.observaciones,
-                  centrocostoId: centrocostoId || ordencompra.centrocostoId,
-                  estadoordenId: estadoordenId || ordencompra.estadoordenId
+                  centrocostoId: CentroCosto || ordencompra.centrocostoId,
+                  estadoordenId: EstadoOrden || ordencompra.estadoordenId
                 })
                 .then((upOrden) => {
                   res.status(200).send({
@@ -63,8 +63,8 @@ class OrdenCompras {
                         fecha_emision: fecha_emision || upOrden.fecha_emision,
                         numero_oc: numero_oc || upOrden.numero_oc,
                         observaciones: observaciones || upOrden.observaciones,
-                        centrocostoId: centrocostoId || upOrden.centrocostoId,
-                        estadoordenId: estadoordenId || upOrden.estadoordenId     
+                        centrocostoId: CentroCosto || upOrden.centrocostoId,
+                        estadoordenId: EstadoOrden || upOrden.estadoordenId     
                     }
                   })
                 })
