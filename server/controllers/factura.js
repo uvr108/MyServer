@@ -4,8 +4,8 @@ const { Factura } = model;
 
 class Facturas {
     static insert(req, res) {
-        const { numero_registro, numero_cuotas, monto, fecha_recepcion, observacion } = req.body
-        const { estadofacturaId, ordencompraId } = req.params
+        const { numero_registro, numero_cuotas, monto, fecha_recepcion, observacion, estadofacturaId } = req.body
+        const { ordencompraId } = req.params
         return Factura
             .create({
                 numero_registro,

@@ -67,7 +67,7 @@ export default (app) => {
 
     // Solicitud
 
-    app.post('/api/Solicitud/:subitemId/:centrocostoId/:estadosolicitudId', Solicitudes.insert); 
+    app.post('/api/Solicitud/:subitemId', Solicitudes.insert); 
     app.get('/api/Solicitud', Solicitudes.list); 
     app.get('/api/Solicitud/pk/:solicitudId',Solicitudes.getByPk);
     app.get('/api/Solicitud/fk/:subitemId',Solicitudes.getByFk);
@@ -76,7 +76,7 @@ export default (app) => {
 
     // OrdenCompra
 
-    app.post('/api/OrdenCompra/:solicitudId/:centrocostoId/:estadoordenId', OrdenCompras.insert); 
+    app.post('/api/OrdenCompra/:solicitudId', OrdenCompras.insert); 
     app.get('/api/OrdenCompra', OrdenCompras.listar); 
     app.get('/api/OrdenCompra/:ordencompraId',OrdenCompras.getByPk);
     app.get('/api/OrdenCompra/fk/:solicitudId',OrdenCompras.getByFk);
@@ -99,7 +99,7 @@ export default (app) => {
     app.get('/api/Factura/:facturaId', Facturas.getByPk);
     app.delete('/api/Factura/:facturaId', Facturas.deleteByPk);
     app.get('/api/Factura/fk/:ordencompraId',Facturas.getByFk);
-    app.post('/api/Factura/:ordencompraId/:estadofacturaId', Facturas.insert);
+    app.post('/api/Factura/:ordencompraId', Facturas.insert);
 
     // CuentaContable
 
@@ -111,7 +111,7 @@ export default (app) => {
    // ComprobanteContable
 
    app.get('/api/ComprobanteContable', ComprobanteContables.listar);
-   app.post('/api/ComprobanteContable/:facturaId/:cuentacontableId', ComprobanteContables.insert);
+   app.post('/api/ComprobanteContable/:facturaId', ComprobanteContables.insert);
    app.put('/api/ComprobanteContable/:comprobantecontableId', ComprobanteContables.modify);
    app.get('/api/ComprobanteContable/fk/:facturaId', ComprobanteContables.getByFk);
    app.delete('/api/ComprobanteContable/:comprobantecontableId', ComprobanteContables.deleteByPk);

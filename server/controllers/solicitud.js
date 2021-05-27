@@ -4,16 +4,16 @@ const { Solicitud } = model;
 
 class Solicitudes {
     static insert(req, res) {
-        const { solicitante, fecha, numero_registro } = req.body
-        const { subitemId, centrocostoId, estadosolicitudId } = req.params
+        const { solicitante, fecha, numero_registro,  centrocostoId, estadosolicitudId } = req.body
+        const { subitemId } = req.params
         return Solicitud
             .create({
                 solicitante,
                 fecha,
                 numero_registro,
-                subitemId,
                 centrocostoId,
-                estadosolicitudId
+                estadosolicitudId,
+                subitemId
             })
             .then(solicitud => res.status(201).send({
                 message: `Your tem has been created successfully `,

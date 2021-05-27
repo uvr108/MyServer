@@ -4,17 +4,17 @@ const { OrdenCompra } = model;
 
 class OrdenCompras {
     static insert(req, res) {
-        const { fecha_emision, numero_oc, observaciones } = req.body
-        const { solicitudId, centrocostoId, estadoordenId } = req.params
+        const { fecha_emision, numero_oc, observaciones,  centrocostoId, estadoordenId  } = req.body
+        const { solicitudId } = req.params
         console.log(`solicitudId ${solicitudId} centrocostoId ${centrocostoId} estadoordenId ${estadoordenId}`);
         return OrdenCompra
             .create({
                 fecha_emision,
                 numero_oc,
                 observaciones,
-                solicitudId,
                 centrocostoId,
-                estadoordenId
+                estadoordenId,
+                solicitudId              
             })
             .then(ordencompra => res.status(201).send({
                 message: `Your subitem has been created successfully `,

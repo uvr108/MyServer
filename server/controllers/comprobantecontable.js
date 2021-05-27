@@ -4,14 +4,16 @@ const { ComprobanteContable } = model;
 
 class ComprobanteContables {
     static insert(req, res) {
-        const { numero_registro, fecha_ingreso } = req.body
-        const { facturaId, cuentacontableId } = req.params
+        const { numero_registro, fecha_ingreso, cuentacontableId } = req.body;
+        const { facturaId } = req.params;
+        console.log('ComprobanteContable -> ', numero_registro, fecha_ingreso, cuentacontableId , facturaId);
         return ComprobanteContable
             .create({
                 numero_registro,
                 fecha_ingreso,
-                facturaId,
-                cuentacontableId
+                cuentacontableId,
+                facturaId
+                
             })
             .then(cuenta => res.status(201).send({
                 message: `Your tem has been created successfully `,
